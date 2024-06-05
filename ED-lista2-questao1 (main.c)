@@ -1,0 +1,31 @@
+/*
+** Função : Teste do TAD de vetor dinâmico de números inteiros
+** Autor : Pedro Henrique Faustino
+** Data : 05/06/2024
+** Observações: Testa as operações do TAD de vetor dinâmico
+*/
+
+#include <stdio.h>
+#include "vetor.h"
+
+int main() {
+    Vetor* v = criar_vetor(2);
+
+    inserir_elemento(v, 10);
+    inserir_elemento(v, 20);
+    inserir_elemento(v, 30);
+    inserir_elemento(v, 40);
+
+    printf("Elementos do vetor: ");
+    imprimir_vetor(v);
+
+    printf("Elemento na posição 2: %d\n", consultar_elemento(v, 2));
+
+    remover_elemento(v, 1);
+    printf("Elementos do vetor após remoção: ");
+    imprimir_vetor(v);
+
+    remover_vetor(v);
+
+    return 0;
+}
