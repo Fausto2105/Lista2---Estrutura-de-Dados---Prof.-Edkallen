@@ -1,0 +1,46 @@
+/*
+** Função : Implementação da fila estática de agendamentos com médicos
+** Autor : Pedro Henrique Faustino
+** Data : 05/06/2024
+** Observações: Implementa as operações definidas na interface
+*/
+
+#include <stdio.h>
+#include <string.h>
+#include "fila_medico.h"
+
+void inicializar_fila_medico(FilaMedico* fila) {
+    fila->frente = 0;
+    fila->traseira = -1;
+    fila->tamanho = 0;
+}
+
+int enfileirar_medico(FilaMedico* fila, Consulta consulta) {
+    if (fila->tamanho == MAX_AGENDAMENTOS) {
+        printf("Fila de médicos cheia. Não é possível agendar mais consultas.\n");
+        return 0;
+    }
+    fila->traseira = (fila->traseira + 1) % MAX_AGENDAMENTOS;
+    fila->consultas[fila->traseira] = consulta;
+    fila->tamanho++;
+    return 1;
+}
+
+int desenfileirar_medico(FilaMedico* fila, Consulta* consulta) {
+    if (fila->tamanho == 0) {
+        printf("Fila de médicos vazia.\n");
+        return 0;
+    }
+    *consulta = fila->consultas[fila->frente];
+    fila->frente = (fila->frente + 1) % MAX_AGENDAMENTOS;
+    fila->tamanho--;
+    return 1;
+}
+
+void imprimir_fila_medico(FilaMedico* fila) {
+    printf("Consultas com Médicos:\n");
+    for (int i = 0; i < fila->tamanho; i++) {
+        int index = (fila->frente + i) % MAX_AGENDAMENTOS;
+        printf("Nome: %s, Horário: %s\n", fila->consultas[index].nome, fila->consultas[index].horario);
+    }
+}
