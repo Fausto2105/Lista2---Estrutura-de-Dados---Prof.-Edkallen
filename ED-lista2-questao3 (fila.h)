@@ -1,0 +1,29 @@
+/*
+** Função : Interface para a fila de matrícula
+** Autor : Pedro Henrique Faustino
+** Data : 05/06/2024
+** Observações: Define as operações permitidas na fila de matrícula
+*/
+
+#ifndef FILA_MATRICULA_H
+#define FILA_MATRICULA_H
+
+#include "estudante.h"
+
+typedef struct NoFila {
+    Estudante estudante;
+    struct NoFila* prox;
+} NoFila;
+
+typedef struct {
+    NoFila* frente;
+    NoFila* traseira;
+    int tamanho;
+} FilaMatricula;
+
+void inicializar_fila(FilaMatricula* fila);
+void enfileirar(FilaMatricula* fila, Estudante estudante);
+int desenfileirar(FilaMatricula* fila, Estudante* estudante);
+void imprimir_fila(FilaMatricula* fila);
+
+#endif 
