@@ -1,0 +1,30 @@
+/*
+** Função : Interface para a fila estática de agendamentos com médicos
+** Autor : Pedro Henrique Faustino
+** Data : 05/06/2024
+** Observações: Define as operações permitidas na fila estática
+*/
+
+#ifndef FILA_MEDICO_H
+#define FILA_MEDICO_H
+
+#define MAX_AGENDAMENTOS 5
+
+typedef struct {
+    char nome[50];
+    char horario[20];
+} Consulta;
+
+typedef struct {
+    Consulta consultas[MAX_AGENDAMENTOS];
+    int frente;
+    int traseira;
+    int tamanho;
+} FilaMedico;
+
+void inicializar_fila_medico(FilaMedico* fila);
+int enfileirar_medico(FilaMedico* fila, Consulta consulta);
+int desenfileirar_medico(FilaMedico* fila, Consulta* consulta);
+void imprimir_fila_medico(FilaMedico* fila);
+
+#endif 
