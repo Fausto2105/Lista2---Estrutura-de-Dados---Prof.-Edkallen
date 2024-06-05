@@ -1,0 +1,51 @@
+/*
+** Função : Implementação da fila de matrícula
+** Autor : Pedro Henrique Faustino
+** Data : 05/06/2024
+** Observações: Implementa as operações definidas na interface
+*/
+
+#include <stdio.h>
+#include <stdlib.h>
+#include "fila_matricula.h"
+
+void inicializar_fila(FilaMatricula* fila) {
+    fila->frente = NULL;
+    fila->traseira = NULL;
+    fila->tamanho = 0;
+}
+
+void enfileirar(FilaMatricula* fila, Estudante estudante) {
+    NoFila* novo = (NoFila*)malloc(sizeof(NoFila));
+    novo->estudante = estudante;
+    novo->prox = NULL;
+    if (fila->tamanho == 0) {
+        fila->frente = novo;
+    } else {
+        fila->traseira->prox = novo;
+    }
+    fila->traseira = novo;
+    fila->tamanho++;
+}
+
+int desenfileirar(FilaMatricula* fila, Estudante* estudante) {
+    if (fila->tamanho == 0) {
+        return 0;
+    }
+
+    NoFila* temp = fila->frente;
+    *estudante = temp->estudante;
+    fila->frente = temp->prox;
+    if (fila->frente == NULL) {
+        fila->traseira = NULL;
+    }
+    free(temp);
+    fila->tamanho--;
+
+    return 1;
+}
+
+void imprimir_fila(FilaMatricula* fila) {
+    NoFila* atual = fila->frente;
+    while (atual != NULL) {
+        printf("Nome
