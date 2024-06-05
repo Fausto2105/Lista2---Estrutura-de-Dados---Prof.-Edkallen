@@ -1,0 +1,28 @@
+/*
+** Função : Interface para a lista encadeada de estudantes
+** Autor : Pedro Henrique Faustino 
+** Data : 05/06/2024
+** Observações: Define as operações permitidas na lista de estudantes
+*/
+
+#ifndef LISTA_ESTUDANTES_H
+#define LISTA_ESTUDANTES_H
+
+#include "estudante.h"
+
+typedef struct No {
+    Estudante estudante;
+    struct No* prox;
+} No;
+
+typedef struct {
+    No* cabeca;
+} ListaEstudantes;
+
+void inicializar_lista(ListaEstudantes* lista);
+void adicionar_estudante(ListaEstudantes* lista, Estudante estudante);
+void remover_estudante(ListaEstudantes* lista, int matricula);
+Estudante* buscar_estudante(ListaEstudantes* lista, int matricula);
+void imprimir_lista(ListaEstudantes* lista);
+
+#endif 
