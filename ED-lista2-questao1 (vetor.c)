@@ -1,0 +1,57 @@
+/*
+** Função : Implementação de um TAD de vetor dinâmico de números inteiros
+** Autor : Pedro Henrique Faustino
+** Data : 05/06/2024
+** Observações: Implementa as operações definidas na interface
+*/
+
+#include <stdio.h>
+#include <stdlib.h>
+#include "vetor.h"
+
+Vetor* criar_vetor(int capacidade_inicial) {
+    Vetor* v = (Vetor*)malloc(sizeof(Vetor));
+    v->dados = (int*)malloc(capacidade_inicial * sizeof(int));
+    v->tamanho = 0;
+    v->capacidade = capacidade_inicial;
+    return v;
+}
+
+void inserir_elemento(Vetor* v, int elemento) {
+    if (v->tamanho == v->capacidade) {
+        v->capacidade *= 2;
+        v->dados = (int*)realloc(v->dados, v->capacidade * sizeof(int));
+    }
+    v->dados[v->tamanho++] = elemento;
+}
+
+void remover_elemento(Vetor* v, int indice) {
+    if (indice < 0 || indice >= v->tamanho) {
+        printf("Índice fora dos limites.\n");
+        return;
+    }
+    for (int i = indice; i < v->tamanho - 1; i++) {
+        v->dados[i] = v->dados[i + 1];
+    }
+    v->tamanho--;
+}
+
+int consultar_elemento(Vetor* v, int indice) {
+    if (indice < 0 || indice >= v->tamanho) {
+        printf("Índice fora dos limites.\n");
+        return -1; 
+    }
+    return v->dados[indice];
+}
+
+void imprimir_vetor(Vetor* v) {
+    for (int i = 0; i < v->tamanho; i++) {
+        printf("%d ", v->dados[i]);
+    }
+    printf("\n");
+}
+
+void remover_vetor(Vetor* v) {
+    free(v->dados);
+    free(v);
+}
