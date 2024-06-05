@@ -1,0 +1,19 @@
+/*
+** Função : Definição do TAD Estudante
+** Autor : Pedro Henrique Faustino
+** Data : 05/06/2024
+** Observações: Estrutura que representa um estudante
+*/
+
+#ifndef ESTUDANTE_H
+#define ESTUDANTE_H
+
+#define NUM_NOTAS 3
+
+typedef struct {
+    char nome[50];
+    int matricula;
+    float notas[NUM_NOTAS];
+} Estudante;
+
+#endif 
