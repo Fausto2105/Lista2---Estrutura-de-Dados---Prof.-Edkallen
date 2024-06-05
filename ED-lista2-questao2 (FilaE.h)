@@ -1,0 +1,27 @@
+/*
+** Função : Interface para a fila dinâmica de agendamentos com enfermagem
+** Autor : Pedro Henrique Faustino
+** Data : 05/06/2024
+** Observações: Define as operações permitidas na fila dinâmica
+*/
+
+#ifndef FILA_ENFERMAGEM_H
+#define FILA_ENFERMAGEM_H
+
+typedef struct No {
+    Consulta consulta;
+    struct No* prox;
+} No;
+
+typedef struct {
+    No* frente;
+    No* traseira;
+    int tamanho;
+} FilaEnfermagem;
+
+void inicializar_fila_enfermagem(FilaEnfermagem* fila);
+void enfileirar_enfermagem(FilaEnfermagem* fila, Consulta consulta);
+int desenfileirar_enfermagem(FilaEnfermagem* fila, Consulta* consulta);
+void imprimir_fila_enfermagem(FilaEnfermagem* fila);
+
+#endif 
