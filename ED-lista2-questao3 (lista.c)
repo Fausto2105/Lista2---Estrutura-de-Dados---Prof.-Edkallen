@@ -1,0 +1,69 @@
+/*
+** Função : Implementação da lista encadeada de estudantes
+** Autor : Pedro Henrique Faustino
+** Data : 05/06/2024
+** Observações: Implementa as operações definidas na interface
+*/
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include "lista_estudantes.h"
+
+void inicializar_lista(ListaEstudantes* lista) {
+    lista->cabeca = NULL;
+}
+
+void adicionar_estudante(ListaEstudantes* lista, Estudante estudante) {
+    No* novo = (No*)malloc(sizeof(No));
+    novo->estudante = estudante;
+    novo->prox = lista->cabeca;
+    lista->cabeca = novo;
+}
+
+void remover_estudante(ListaEstudantes* lista, int matricula) {
+    No* atual = lista->cabeca;
+    No* anterior = NULL;
+
+    while (atual != NULL && atual->estudante.matricula != matricula) {
+        anterior = atual;
+        atual = atual->prox;
+    }
+
+    if (atual == NULL) {
+        printf("Estudante com matrícula %d não encontrado.\n", matricula);
+        return;
+    }
+
+    if (anterior == NULL) {
+        lista->cabeca = atual->prox;
+    } else {
+        anterior->prox = atual->prox;
+    }
+
+    free(atual);
+}
+
+Estudante* buscar_estudante(ListaEstudantes* lista, int matricula) {
+    No* atual = lista->cabeca;
+
+    while (atual != NULL && atual->estudante.matricula != matricula) {
+        atual = atual->prox;
+    }
+
+    if (atual == NULL) {
+        return NULL;
+    } else {
+        return &atual->estudante;
+    }
+}
+
+void imprimir_lista(ListaEstudantes* lista) {
+    No* atual = lista->cabeca;
+    while (atual != NULL) {
+        printf("Nome: %s, Matrícula: %d, Notas: [%.2f, %.2f, %.2f]\n", 
+               atual->estudante.nome, atual->estudante.matricula, 
+               atual->estudante.notas[0], atual->estudante.notas[1], atual->estudante.notas[2]);
+        atual = atual->prox;
+    }
+}
