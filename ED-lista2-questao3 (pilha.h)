@@ -1,0 +1,27 @@
+/*
+** Função : Interface para a pilha de histórico de notas
+** Autor : Pedro Henrique Faustino
+** Data : 05/06/2024
+** Observações: Define as operações permitidas na pilha de histórico de notas
+*/
+
+#ifndef PILHA_NOTAS_H
+#define PILHA_NOTAS_H
+
+#include "estudante.h"
+
+typedef struct NoPilha {
+    float notas[NUM_NOTAS];
+    struct NoPilha* prox;
+} NoPilha;
+
+typedef struct {
+    NoPilha* topo;
+} PilhaNotas;
+
+void inicializar_pilha(PilhaNotas* pilha);
+void empilhar(PilhaNotas* pilha, float notas[NUM_NOTAS]);
+int desempilhar(PilhaNotas* pilha, float notas[NUM_NOTAS]);
+void imprimir_pilha(PilhaNotas* pilha);
+
+#endif 
