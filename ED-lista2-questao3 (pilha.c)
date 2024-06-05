@@ -1,0 +1,43 @@
+/*
+** Função : Implementação da pilha de histórico de notas
+** Autor : Pedro Henrique Faustino
+** Data : 05/06/2024
+** Observações: Implementa as operações definidas na interface
+*/
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include "pilha_notas.h"
+
+void inicializar_pilha(PilhaNotas* pilha) {
+    pilha->topo = NULL;
+}
+
+void empilhar(PilhaNotas* pilha, float notas[NUM_NOTAS]) {
+    NoPilha* novo = (NoPilha*)malloc(sizeof(NoPilha));
+    memcpy(novo->notas, notas, NUM_NOTAS * sizeof(float));
+    novo->prox = pilha->topo;
+    pilha->topo = novo;
+}
+
+int desempilhar(PilhaNotas* pilha, float notas[NUM_NOTAS]) {
+    if (pilha->topo == NULL) {
+        return 0;
+    }
+
+    NoPilha* temp = pilha->topo;
+    memcpy(notas, temp->notas, NUM_NOTAS * sizeof(float));
+    pilha->topo = temp->prox;
+    free(temp);
+
+    return 1;
+}
+
+void imprimir_pilha(PilhaNotas* pilha) {
+    NoPilha* atual = pilha->topo;
+    while (atual != NULL) {
+        printf("Notas: [%.2f, %.2f, %.2f]\n", atual->notas[0], atual->notas[1], atual->notas[2]);
+        atual = atual->prox;
+    }
+}
