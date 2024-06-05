@@ -1,0 +1,53 @@
+/*
+** Função : Teste do sistema de agendamento de consultas para uma clínica médica
+** Autor : Pedro Henrique Faustino
+** Data : 05/06/2024
+** Observações: Testa as operações das filas de médicos e enfermagem
+*/
+
+#include <stdio.h>
+#include "fila_medico.h"
+#include "fila_enfermagem.h"
+
+int main() {
+    FilaMedico filaMedico;
+    inicializar_fila_medico(&filaMedico);
+
+    Consulta c1 = {"João", "10:00"};
+    Consulta c2 = {"Maria", "10:30"};
+    Consulta c3 = {"Carlos", "11:00"};
+    Consulta c4 = {"Ana", "11:30"};
+    Consulta c5 = {"Pedro", "12:00"};
+    Consulta c6 = {"Laura", "12:30"};
+
+    enfileirar_medico(&filaMedico, c1);
+    enfileirar_medico(&filaMedico, c2);
+    enfileirar_medico(&filaMedico, c3);
+    enfileirar_medico(&filaMedico, c4);
+    enfileirar_medico(&filaMedico, c5);
+    enfileirar_medico(&filaMedico, c6); 
+
+    imprimir_fila_medico(&filaMedico);
+
+    Consulta consultaRemovida;
+    desenfileirar_medico(&filaMedico, &consultaRemovida);
+    printf("Consulta removida: Nome: %s, Horário: %s\n", consultaRemovida.nome, consultaRemovida.horario);
+
+    imprimir_fila_medico(&filaMedico);
+
+    FilaEnfermagem filaEnfermagem;
+    inicializar_fila_enfermagem(&filaEnfermagem);
+
+    enfileirar_enfermagem(&filaEnfermagem, c1);
+    enfileirar_enfermagem(&filaEnfermagem, c2);
+    enfileirar_enfermagem(&filaEnfermagem, c3);
+
+    imprimir_fila_enfermagem(&filaEnfermagem);
+
+    desenfileirar_enfermagem(&filaEnfermagem, &consultaRemovida);
+    printf("Consulta removida: Nome: %s, Horário: %s\n", consultaRemovida.nome, consultaRemovida.horario);
+
+    imprimir_fila_enfermagem(&filaEnfermagem);
+
+    return 0;
+}
