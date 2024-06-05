@@ -1,0 +1,24 @@
+/*
+** Função : Interface para um TAD de vetor dinâmico de números inteiros
+** Autor : Pedro Henrique Faustino
+** Data : 05/06/2024
+** Observações: Define as operações permitidas no vetor dinâmico
+*/
+
+#ifndef VETOR_H
+#define VETOR_H
+
+typedef struct {
+    int *dados;
+    int tamanho;
+    int capacidade;
+} Vetor;
+
+Vetor* criar_vetor(int capacidade_inicial);
+void inserir_elemento(Vetor* v, int elemento);
+void remover_elemento(Vetor* v, int indice);
+int consultar_elemento(Vetor* v, int indice);
+void imprimir_vetor(Vetor* v);
+void remover_vetor(Vetor* v);
+
+#endif 
