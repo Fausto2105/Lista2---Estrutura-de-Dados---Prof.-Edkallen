@@ -1,0 +1,30 @@
+/*
+** Função : Implementação da fila de agendamento de tarefas
+** Autor : Pedro Henrique Faustino
+** Data : 05/06/2024
+** Observações: Implementa as operações definidas na interface
+*/
+
+#include <stdio.h>
+#include <stdlib.h>
+#include "fila_tarefas.h"
+
+void inicializar_fila(FilaTarefas* fila) {
+    fila->frente = NULL;
+    fila->traseira = NULL;
+    fila->tamanho = 0;
+}
+
+void enfileirar(FilaTarefas* fila, Tarefa tarefa) {
+    NoFila* novo = (NoFila*)malloc(sizeof(NoFila));
+    novo->tarefa = tarefa;
+    novo->prox = NULL;
+    if (fila->tamanho == 0) {
+        fila->frente = novo;
+    } else {
+        fila->traseira->prox = novo;
+    }
+    fila->traseira = novo;
+    fila->tamanho++;
+}
+
