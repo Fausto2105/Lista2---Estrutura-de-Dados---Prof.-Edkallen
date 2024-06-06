@@ -1,0 +1,29 @@
+/*
+** Função : Interface para a lista encadeada de tarefas a serem realizadas
+** Autor : Pedro Henrique Faustino
+** Data : 05/06/2024
+** Observações: Define as operações permitidas na lista de tarefas
+*/
+
+#ifndef LISTA_TAREFAS_H
+#define LISTA_TAREFAS_H
+
+#include "tarefa.h"
+
+typedef struct NoLista {
+    Tarefa tarefa;
+    struct NoLista* prox;
+} NoLista;
+
+typedef struct {
+    NoLista* cabeca;
+    NoLista* cauda;
+} ListaTarefas;
+
+void inicializar_lista_tarefas(ListaTarefas* lista);
+void adicionar_tarefa_inicio(ListaTarefas* lista, Tarefa tarefa);
+void adicionar_tarefa_fim(ListaTarefas* lista, Tarefa tarefa);
+int remover_tarefa(ListaTarefas* lista, char* descricao, Tarefa* tarefa);
+void imprimir_lista_tarefas(ListaTarefas* lista);
+
+#endif 
