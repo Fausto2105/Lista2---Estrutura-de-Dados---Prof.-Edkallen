@@ -1,0 +1,76 @@
+/*
+** Função : Implementação da lista encadeada de tarefas a serem realizadas
+** Autor : Pedro Henrique Faustino
+** Data : 05/06/2024
+** Observações: Implementa as operações definidas na interface
+*/
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include "lista_tarefas.h"
+
+void inicializar_lista_tarefas(ListaTarefas* lista) {
+    lista->cabeca = NULL;
+    lista->cauda = NULL;
+}
+
+void adicionar_tarefa_inicio(ListaTarefas* lista, Tarefa tarefa) {
+    NoLista* novo = (NoLista*)malloc(sizeof(NoLista));
+    novo->tarefa = tarefa;
+    novo->prox = lista->cabeca;
+    lista->cabeca = novo;
+    if (lista->cauda == NULL) {
+        lista->cauda = novo;
+    }
+}
+
+void adicionar_tarefa_fim(ListaTarefas* lista, Tarefa tarefa) {
+    NoLista* novo = (NoLista*)malloc(sizeof(NoLista));
+    novo->tarefa = tarefa;
+    novo->prox = NULL;
+    if (lista->cauda == NULL) {
+        lista->cabeca = novo;
+        lista->cauda = novo;
+    } else {
+        lista->cauda->prox = novo;
+        lista->cauda = novo;
+    }
+}
+
+int remover_tarefa(ListaTarefas* lista, char* descricao, Tarefa* tarefa) {
+    NoLista* atual = lista->cabeca;
+    NoLista* anterior = NULL;
+
+    while (atual != NULL && strcmp(atual->tarefa.descricao, descricao) != 0) {
+        anterior = atual;
+        atual = atual->prox;
+    }
+
+    if (atual == NULL) {
+        return 0; 
+    }
+
+    if (anterior == NULL) {
+        lista->cabeca = atual->prox;
+    } else {
+        anterior->prox = atual->prox;
+    }
+
+    if (atual == lista->cauda) {
+        lista->cauda = anterior;
+    }
+
+    *tarefa = atual->tarefa;
+    free(atual);
+    return 1; 
+}
+
+void imprimir_lista_tarefas(ListaTarefas* lista) {
+    NoLista* atual = lista->cabeca;
+    while (atual != NULL) {
+        printf("Descrição: %s, Prioridade: %d, Data de Vencimento: %d\n", 
+               atual->tarefa.descricao, atual->tarefa.prioridade, atual->tarefa.dataVencimento);
+        atual = atual->prox;
+    }
+}
