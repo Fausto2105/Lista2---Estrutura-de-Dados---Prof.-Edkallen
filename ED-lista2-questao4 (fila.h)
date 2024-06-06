@@ -1,0 +1,29 @@
+/*
+** Função : Interface para a fila de agendamento de tarefas
+** Autor : Pedro Henrique Faustino
+** Data : 05/06/2024
+** Observações: Define as operações permitidas na fila de agendamento de tarefas
+*/
+
+#ifndef FILA_TAREFAS_H
+#define FILA_TAREFAS_H
+
+#include "tarefa.h"
+
+typedef struct NoFila {
+    Tarefa tarefa;
+    struct NoFila* prox;
+} NoFila;
+
+typedef struct {
+    NoFila* frente;
+    NoFila* traseira;
+    int tamanho;
+} FilaTarefas;
+
+void inicializar_fila(FilaTarefas* fila);
+void enfileirar(FilaTarefas* fila, Tarefa tarefa);
+int desenfileirar(FilaTarefas* fila, Tarefa* tarefa);
+void imprimir_fila(FilaTarefas* fila);
+
+#endif 
