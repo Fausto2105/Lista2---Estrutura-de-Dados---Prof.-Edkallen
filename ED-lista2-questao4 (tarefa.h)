@@ -1,0 +1,17 @@
+/*
+** Função : Definição do TAD Tarefa
+** Autor : Pedro Henrique Faustino
+** Data : 05/06/2024
+** Observações: Estrutura que representa uma tarefa
+*/
+
+#ifndef TAREFA_H
+#define TAREFA_H
+
+typedef struct {
+    char descricao[100];
+    int prioridade; // 1 (baixa), 2 (média), 3 (alta)
+    int dataVencimento; // formato DDMMYYYY
+} Tarefa;
+
+#endif 
