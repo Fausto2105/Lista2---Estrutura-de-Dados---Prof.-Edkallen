@@ -1,0 +1,27 @@
+/*
+** Função : Interface para a pilha de tarefas concluídas
+** Autor : Pedro Henrique Faustino
+** Data : 05/06/2024
+** Observações: Define as operações permitidas na pilha de tarefas
+*/
+
+#ifndef PILHA_TAREFAS_H
+#define PILHA_TAREFAS_H
+
+#include "tarefa.h"
+
+typedef struct NoPilha {
+    Tarefa tarefa;
+    struct NoPilha* prox;
+} NoPilha;
+
+typedef struct {
+    NoPilha* topo;
+} PilhaTarefas;
+
+void inicializar_pilha(PilhaTarefas* pilha);
+void empilhar(PilhaTarefas* pilha, Tarefa tarefa);
+int desempilhar(PilhaTarefas* pilha, Tarefa* tarefa);
+void imprimir_pilha(PilhaTarefas* pilha);
+
+#endif 
